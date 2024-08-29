@@ -1,0 +1,12 @@
+python-gdcm
+pylibjpeg-libjpeg
+fastapi
+pydantic
+uvicorn
+tensorflow==2.15.0
+kecam
+numpy
+pydicom
+matplotlib
+opencv-python-headless
+python-multipart

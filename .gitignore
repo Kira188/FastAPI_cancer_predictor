@@ -1,0 +1,7 @@
+app/ML/model_weights.h5
+app/ML/1420153030.dcm
+myenv/
+static
+uploads
+app/__pycache__
+app/ML/__pycache__
