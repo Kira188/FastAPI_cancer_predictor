@@ -346,9 +346,12 @@ def make_prediction(file_name, rm_file):
     final_img = np.expand_dims(final_img, axis=-1)  # Add channel dimension
     final_img = np.expand_dims(final_img, axis=0)
     prediction = model.predict_on_batch(final_img).squeeze()
-    prediction_value = float(prediction)
+    prediction_value = round(float(prediction),4)
     cancer = int(np.int8(prediction > THRESHOLD_BEST))
-    accuracy = round(prediction_value * 100, 2)
+    if cancer ==1:
+        accuracy = round(prediction_value * 100, 2)
+    else:
+        accuracy = round(((1-prediction_value) * 100), 2)
     if rm_file:
         os.remove(path)
     return prediction_value,cancer,accuracy

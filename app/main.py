@@ -7,9 +7,25 @@ import uuid
 from tempfile import NamedTemporaryFile
 from app.ML.predict import make_prediction
 import os
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 
 app = FastAPI()
+origins = [
+    "http://127.0.0.1:5500",  # Your frontend URL
+    "http://localhost:5500", 
+    "http://127.0.0.1:5500/public/index02.html"   # Additional URLs if needed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # @app.post("/files/")
 # async def create_file(file: Annotated[bytes, File()]):
 #     return {"file_size": len(file)}
@@ -83,7 +99,7 @@ async def create_upload_file(file: UploadFile = File(...)):
     return {
         "filepath": file_path,
         "prediction_value": prediction_value,
-        "prediction_binary": cancer,
+        "cancer": cancer,
         "accuracy": accuracy
     }
 # Save the processed image
